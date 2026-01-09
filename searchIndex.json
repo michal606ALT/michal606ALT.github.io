@@ -1,0 +1,25 @@
+[
+{
+		"title": "HOME",
+		"date":"Fri Jan 09 2026 16:40:43 GMT+0000 (Coordinated Universal Time)",
+		"url":"/",
+		"content": "dsdd",
+		"tags": [ "note","gardenEntry"]
+},
+
+{
+		"title": "Algorytm Euklidesa",
+		"date":"Fri Jan 09 2026 16:40:43 GMT+0000 (Coordinated Universal Time)",
+		"url":"/szkola/informatyka/algorytmy/algorytm-euklidesa/",
+		"content": "Cel\nZnajduje <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Największy Wspólny Dzielnik</a> (GCD lub NWD) dwóch liczb.\nIdea działania\nDla dwóch liczb całkowitych dodatnich a i b zachodzi równość:\nNWD(a,b)=NWD(b,a(modb))Algorytm powtarzamy tak długo, aż reszta z dzielenia wyniesie 0. Wtedy ostatnia niezerowa reszta (lub liczba, przez którą dzieliliśmy w ostatnim kroku) jest szukanym NWD.\nStworzymy dodatkową zmienną tymczasową, i tak długo jak b nie będzie 0, będziemy powtarzać\nc=amodba=bb=cKiedy użyć?\nW przypadku tego algorytmu proste jest zauważenie potrzeby jego użycia, gdy taka jest obecna.\nImplementacja\n#include &lt;iostream&gt;\n#include &lt;cmath&gt;\nusing namespace std;\n\nint NWD(int &amp; a, int &amp; b) {\nint c;\nwhile(b != 0){\nc = a%b;\na = b;\nb = c;\n}\nreturn a;\n}\n\nZłożoność\nCzasowa: O(n)\nPamięciowa: O(log n)",
+		"tags": ["include", "include", "note","informatyka","matematyka"]
+},
+
+{
+		"title": "Sito Erastotenesa",
+		"date":"Fri Jan 09 2026 16:40:43 GMT+0000 (Coordinated Universal Time)",
+		"url":"/szkola/informatyka/algorytmy/sito-erastotenesa/",
+		"content": "Cel\nWyznaczenie wszystkich liczb pierwszych mniejszych od danej\nIdea działania\nJeżeli wykreślimy wielokrotności wszystkich mniejszych liczb pierwszych, to mamy pewność, że następna niewykreślona liczba też jest pierwsza.\nZ przedziału [2,n] bierzemy liczbę najmniejszą (2), i wykreślamy wszystkie jesj wielokrotności.\nZ pozostałych wybieramy najmniejszą (3) i wykreślamy także jej wielokrotności.\nPowtarzamy to do momentu, gdy kolejna wybrana liczba i będzie większa niż n\nKiedy użyć?\nW przypadku tego algorytmu proste jest zauważenie potrzeby jego użycia, gdy taka jest obecna.\nImplementacja\n#include &lt;bits/stdc++.h&gt;\nusing namespace std;\n\nvector&lt;int&gt; sieve(int &amp; n) {\nif(n &lt; 2) return {};\nvector&lt;bool&gt; prime (n+1, true);\n\tprime[0] = false;\n\tprime[1] = false;\n\t\n\tfor(int i = 0; i*i &lt;= n; i++){\n\t\tif(prime[i]){\n\t\t\tfor(int j = i * i; t &lt;= n; t+= i){\n\t\t\t\tprime[t] = false;\n\t\t\t}\n\t\t}\n\t}\n\t\n\tvector&lt;int&gt; res;\n\tfor(int i = 2; i &lt; prime.size(); i++){\n\t\tif(prime[i]) res.push_back(i);\n\t}\n\treturn res;\n}\n\nZłożoność\nCzasowa: O(nlog⁡log⁡n)",
+		"tags": ["include", "note"]
+}
+]
