@@ -14,7 +14,7 @@ L - początek przedziału
 R - koniec przedziału
 P - tablica z sumą prefiksową
 
-Takie zastosowanie często występuje w problemach z [[Podtablica\|podtablicami]].
+Takie zastosowanie często występuje w problemach z [[Szkoła/Informatyka/Podtablica\|podtablicami]].
 
 Możemy także obliczyć sumo postfiksową, czyli taką liczącą sumę od końca
 $$
@@ -29,3 +29,7 @@ for(int i = 0; i < n; i++){
 	prefixSum[i + 1] = prefixSum[i] + arr[i];
 }
 ```
+
+# Zadania
+## Leetcode
+https://leetcode.com/problem-list/prefix-sum/
