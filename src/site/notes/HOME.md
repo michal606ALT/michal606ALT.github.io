@@ -2,4 +2,4 @@
 {"dg-publish":true,"permalink":"/home/","tags":["gardenEntry"]}
 ---
 
-dsddtytryrtyrty
+To jest przyszła strona główna.
