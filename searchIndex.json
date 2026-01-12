@@ -1,23 +1,31 @@
 [
 {
 		"title": "HOME",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/",
-		"content": "To jest przyszła strona główna.",
+		"content": "To jest przyszła strona główna.\nTODO\n\nDijkstra\nSortowanie bąbelkowe\nSortowanie przez wstawianie\nMerge Sort\n[ ]",
 		"tags": [ "note","gardenEntry"]
 },
 
 {
 		"title": "Algorytm Euklidesa",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/algorytmy/algorytm-euklidesa/",
 		"content": "Cel\nZnajduje <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Największy Wspólny Dzielnik</a> (GCD lub NWD) dwóch liczb.\nIdea działania\nDla dwóch liczb całkowitych dodatnich a i b zachodzi równość:\nNWD(a,b)=NWD(b,a(modb))Algorytm powtarzamy tak długo, aż reszta z dzielenia wyniesie 0. Wtedy ostatnia niezerowa reszta (lub liczba, przez którą dzieliliśmy w ostatnim kroku) jest szukanym NWD.\nStworzymy dodatkową zmienną tymczasową, i tak długo jak b nie będzie 0, będziemy powtarzać\nc=amodba=bb=cKiedy użyć?\nW przypadku tego algorytmu proste jest zauważenie potrzeby jego użycia, gdy taka jest obecna.\nImplementacja\n#include &lt;iostream&gt;\n#include &lt;cmath&gt;\nusing namespace std;\n\nint NWD(int &amp; a, int &amp; b) {\nint c;\nwhile(b != 0){\nc = a%b;\na = b;\nb = c;\n}\nreturn a;\n}\n\nZłożoność\nCzasowa: O(n)\nPamięciowa: O(log n)",
 		"tags": ["include", "include", "note","informatyka","matematyka"]
 },
 
 {
+		"title": "Dijkstra's algorithm",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
+		"url":"/szkola/informatyka/algorytmy/dijkstra-s-algorithm/",
+		"content": "Cel\nZnaleźć najkrótszą drogę od źródła do każdego z wierzchołków na <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">grafie</a>.\nPlan działania\n\nTworzymy tablicę dystans i ustawiamy wartość wszystkich elementów na ∞. Źródło powinno mieć wartość 0.\nTworzymy <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">kolejkę priorytetową</a> i na początku wrzucamy do niej parę źół(0; źródło) kolejką będzie przetrzymywała pary ł(dystans,wierzchołek).\nWeź pierwszy element (u) z kolejki i dla każdego jego sąsiada (v): Jeżeli$$dystans[v] &gt; dystans[u] + waga$$ to$$dystans[v] = dystans[u] + waga$$ i dodaj nową parę do kolejki\nJeżeli d_z_kolejki &gt; dystans[u], to znaczy, że w międzyczasie znaleźliśmy już lepszą trasę do wierzchołka u i ten wpis w kolejce jest &quot;przeterminowany&quot;. Wtedy robimy continue.\nBierzemy nowe elementy, tak długo aż kolejka nie będzie pusta.\n\nKod\n#include &lt;iostream&gt;\n#include &lt;vector&gt;\n#include &lt;queue&gt;\n\nusing namespace std;\n\nconst long long INF = 1e18;\n\nstruct Edge {\nint to;\nint weight;\n};\n\nvoid dijkstra(int start, const vector&lt;vector&lt;Edge&gt;&gt;&amp; graph) {\nint n = graph.size();\n\nvector&lt;long long&gt; dist(n, INF);\ndist[start] = 0;\n\n// 2. Kolejka priorytetowa przechowująca pary {dystans, wierzchołek}\n// std::greater sprawia, że najmniejsze wartości są na górze (min-heap)\npriority_queue&lt;pair&lt;long long, int&gt;, vector&lt;pair&lt;long long, int&gt;&gt;, greater&lt;pair&lt;long long, int&gt;&gt;&gt; pq;\n\npq.push({0, start});\n\nwhile (!pq.empty()) {\nlong long d = pq.top().first;\nint u = pq.top().second;\npq.pop();\n\n// 4. Sprawdzenie, czy to &quot;stara&quot; wartość\nif (d &gt; dist[u]) continue;\n\nfor (const auto&amp; edge : graph[u]) {\nint v = edge.to;\nint weight = edge.weight;\n\nif (dist[v] &gt; dist[u] + weight) {\ndist[v] = dist[u] + weight;\npq.push({dist[v], v});\n}\n}\n}\n\ncout &lt;&lt; &quot;Najkrótsze dystanse od wierzchołka &quot; &lt;&lt; start &lt;&lt; &quot;:&quot; &lt;&lt; endl;\nfor (int i = 0; i &lt; n; i++) {\nif (dist[i] == INF) cout &lt;&lt; i &lt;&lt; &quot;: nieosiągalny&quot; &lt;&lt; endl;\nelse cout &lt;&lt; i &lt;&lt; &quot;: &quot; &lt;&lt; dist[i] &lt;&lt; endl;\n}\n}\n\nint main() {\nint nodes = 5;\nvector&lt;vector&lt;Edge&gt;&gt; graph(nodes);\n\n// Przykładowy graf\ngraph[0].push_back({1, 4});\ngraph[0].push_back({2, 1});\ngraph[2].push_back({1, 2});\ngraph[1].push_back({3, 1});\ngraph[2].push_back({3, 5});\ngraph[3].push_back({4, 3});\n\ndijkstra(0, graph);\n\nreturn 0;\n}\n\nWersja z wieloma źródłami\nMożemy chcieć użyć więcej niż 1 źródła. Wtedy będziemy szukać najmniejszego dystansu od jakiegokolwiek z źródeł.\nWtedy dla każdego źródła ustawimy dystans[u]=0 i wszystkie źródła trafią początkowo do kolejki priorytetowej.",
+		"tags": ["include", "include", "include", "note"]
+},
+
+{
 		"title": "Sito Erastotenesa",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/algorytmy/sito-erastotenesa/",
 		"content": "Cel\nWyznaczenie wszystkich liczb pierwszych mniejszych od danej\nIdea działania\nJeżeli wykreślimy wielokrotności wszystkich mniejszych liczb pierwszych, to mamy pewność, że następna niewykreślona liczba też jest pierwsza.\nZ przedziału [2,n] bierzemy liczbę najmniejszą (2), i wykreślamy wszystkie jesj wielokrotności.\nZ pozostałych wybieramy najmniejszą (3) i wykreślamy także jej wielokrotności.\nPowtarzamy to do momentu, gdy kolejna wybrana liczba i będzie większa niż n\nKiedy użyć?\nW przypadku tego algorytmu proste jest zauważenie potrzeby jego użycia, gdy taka jest obecna.\nImplementacja\n#include &lt;bits/stdc++.h&gt;\nusing namespace std;\n\nvector&lt;int&gt; sieve(int &amp; n) {\nif(n &lt; 2) return {};\nvector&lt;bool&gt; prime (n+1, true);\n\tprime[0] = false;\n\tprime[1] = false;\n\t\n\tfor(int i = 0; i*i &lt;= n; i++){\n\t\tif(prime[i]){\n\t\t\tfor(int j = i * i; t &lt;= n; t+= i){\n\t\t\t\tprime[t] = false;\n\t\t\t}\n\t\t}\n\t}\n\t\n\tvector&lt;int&gt; res;\n\tfor(int i = 2; i &lt; prime.size(); i++){\n\t\tif(prime[i]) res.push_back(i);\n\t}\n\treturn res;\n}\n\nZłożoność\nCzasowa: O(nlog⁡log⁡n)",
 		"tags": ["include", "note"]
@@ -25,7 +33,7 @@
 
 {
 		"title": "Test pierwszości",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/algorytmy/test-pierwszosci/",
 		"content": "Cel\nSprawdzenie czy liczba jest pierwsza\nIdea działania\nLiczba jest pierwsza jeżeli jej dzielnikami są tylko 1 i ona sama. Możemy sprawdzić wszystkie liczby w przedziale [2,n]. Jest to metoda naiwna.\nZamiast tego możemy wygenerować liczby pierwsze za pomocą <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/szkola/informatyka/algorytmy/sito-erastotenesa/\">sita Eratostenesa</a> i sprawdzić tylko je.\nZaczniemy od generowania liczb pierwszych w przedziale [0,nmax]. Potem aby sprawdzić czy dana liczba jest pierwsza przejdziemy przez liczby pierwsze po kolei i sprawdzimy czy zachodzi podzielność.\nKiedy użyć?\nJeżeli mamy mało liczb, ale mogą być duże (np. 1014), to lepiej użyć metody naiwnej.\nJeżeli mamy dużo, ale stosunkowo małych liczb, to lepiej użyć sita.\nImplementacja\n#include &lt;bits/stdc++.h&gt;\nusing namespace std;\n\nbool isPrime(vector&lt;int&gt; &amp;primes, int&amp; n){\n\tfor(auto&amp; p: primes){\n\t\tif(p * p &gt; n) break;\n\t\t\n\t\tif(n % p == 0) return false;\n\t}\n\treturn true;\n}\n\nZłożoność\nCzasowa: O(nln⁡n) (Jeżeli mamy listę liczb pierwszych)\nPamięciowa: O(nmax",
 		"tags": ["include", "note"]
@@ -33,7 +41,7 @@
 
 {
 		"title": "Podtablica",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/podtablica/",
 		"content": "To ciągły fragment <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">tablicy</a>. Inaczej to ujmując, podtablica to <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">Tablica</a> w tablicy. Może obejmować całą oryginalną tablicę.\nIlość\nJeżeli mamy tablicę rozmiaru N, to mamy:\nn(n+1)2niepustych podtablic.",
 		"tags": [ "note"]
@@ -41,7 +49,7 @@
 
 {
 		"title": "Suma prefiksowa",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/techniki/suma-prefiksowa/",
 		"content": "Jest to technika która polega na stworzeniu <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">tablicy</a> przechowywującej sumę pierwszych i elementów.\na[i]=∑n=1it[n−1]Czasem a[0] = 0, a czasem a[0]=n[0]. Zmienia to trochę sposób numerowania pól (pierwsza metoda przesuwa całą tablicę o 1 index w przód).\nKiedy użyć?\nTa metoda jest przydatna, kiedy chcemy znaleźć sumę jakiegoś przedziału w tablicy. Zamiast liczyć taką sumę liniowo, możemy zrobić to w czasie stałym.\nSuma(L,R)=P[R+1]−P[L]L - początek przedziału\nR - koniec przedziału\nP - tablica z sumą prefiksową\nTakie zastosowanie często występuje w problemach z <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/szkola/informatyka/podtablica/\">podtablicami</a>.\nMożemy także obliczyć sumo postfiksową, czyli taką liczącą sumę od końca\nPost(k)=P[N]−P(N−k)Implementacja\nvector&lt;int&gt; prefixSum (n + 1, 0);\nfor(int i = 0; i &lt; n; i++){\n\tprefixSum[i + 1] = prefixSum[i] + arr[i];\n}\n\nZadania\nLeetcode\nhttps://leetcode.com/problem-list/prefix-sum/",
 		"tags": [ "note"]
@@ -49,15 +57,15 @@
 
 {
 		"title": "Mnożenie",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/zadania/mnozenie/",
-		"content": "Cel\nMamy pomnożyć przez siebie 2 liczby, jednak są one za duże na liczbowe typy danych.\nOmówienie\nWczytamy te liczby początkowo <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">jako tekst</a>, a potem zamienimy na <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">tablice</a> cyfr. Przy okazji musimy obsłużyć możliwy minus.\nDalej stworzymy tablicę wynikową o rozmiarze a.size() + b.size() + 1.\nZa pomocą pętli zagnieżdżonych przechodzimy przez każdą parę cyfr (a[i],b[j]).\nTeraz zapiszemy w tablicy wynikowej iloczyn tych dwóch cyfr na pozycji i+j.\nPrzechodzimy przez tablicę wynikową i jeżeli wartość jest większa niż 10, to przepisujemy &quot;nadwyżkę&quot; do kolejnego pola (możliwe jest że nam zabraknie pól, trzeba wtedy dodać nowy element na koniec tablicy).\nJeżeli wcześniej wyszło nam, że wynik będzie ujemny, to wypisujemy '-'.\nIdziemy od końca tablicy wynikowej, musimy pominąć wszystkie zera na początku liczby (np. 005 nie jest prawidłowym wynikiem).",
+		"content": "Cel\nMamy pomnożyć przez siebie 2 liczby, jednak są one za duże na liczbowe typy danych.\nOmówienie\nWczytamy te liczby początkowo <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">jako tekst</a>, a potem zamienimy na <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">tablice</a> cyfr. Przy okazji musimy obsłużyć możliwy minus.\nTablice powinny być odwrócone (ostatnia cyfra powinna być na początku).\nDalej stworzymy tablicę wynikową o rozmiarze a.size()+b.size()−1.\nZa pomocą 2 pętli zagnieżdżonych przechodzimy przez każdą parę cyfr (a[i],b[j]).\nPierwsza pętla powinna przechodzić przez cyfry a, a druga przez cyfry b.\nTeraz zapiszemy w tablicy wynikowej iloczyn tych dwóch cyfr, zwiększając wartość na pozycji i+j.\nc[i+j]=a[i]+b[I]Przechodzimy przez tablicę wynikową i jeżeli wartość jest większa niż 10, to przepisujemy &quot;nadwyżkę&quot; do kolejnego pola (możliwe jest że nam zabraknie pól, trzeba wtedy dodać nowy element na koniec tablicy).\nJeżeli wcześniej wyszło nam, że wynik będzie ujemny, to wypisujemy '-'.\nIdziemy od końca tablicy wynikowej, musimy pominąć wszystkie zera na początku liczby (np. 005 nie jest prawidłowym wynikiem).",
 		"tags": [ "note"]
 },
 
 {
 		"title": "Podtablica o największej sumie",
-		"date":"Sat Jan 10 2026 18:08:00 GMT+0000 (Coordinated Universal Time)",
+		"date":"Mon Jan 12 2026 18:38:37 GMT+0000 (Coordinated Universal Time)",
 		"url":"/szkola/informatyka/zadania/podtablica-o-najwiekszej-sumie/",
 		"content": "Cel\nZnaleźć największą sumę <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/szkola/informatyka/podtablica/\">podtablicy</a> w danej <a class=\"internal-link is-unresolved\" href=\"/404\" target=\"\">tablicy</a>.\nMetoda naiwna\nMożemy przejść przez każdą możliwą podtablicę i iterując się przez jej elementy, obliczyć jej sumę.\nZłożoność czasowa: O(n3)\nZłożoność pamięciowa: O(1)\nLepsza metoda naiwna\nJeżeli znamy sumę elementów [j,i] to możemy prosto obliczyć sumę [j,i+1], trzeba dodać wartość elementu i+1.\nZłożoność czasowa: O(n2)\nZłożoność pamięciowa: O(1)\nMetoda z użyciem <a class=\"internal-link\" target=\"\" data-note-icon=\"\" href=\"/szkola/informatyka/techniki/suma-prefiksowa/\">sum prefiksowych</a>\nWiemy że:\nSuma(i,j)=P[j+1]−P[i]Zauważmy, że aby suma były największa dla danego j, trzeba odjąć jak najmniejsze P[i]. Możemy zapamiętać, jaki był najmniejszy element do tej pory i go odjąć. To eliminuje złożoność kwadratową z naszego programu.\nZłożoność czasowa: O(n)\nZłożoność pamięciowa: O(n)\nKod\nint maxSubArray(vector&lt;int&gt; &amp; a){\n\tvector&lt;int&gt; prefix(a.size() + 1, 0);\n\t\n\t//Budujemy tablicę z sumami prefiksowymi\n\tfor(int i = 0; i &lt; a.size(); ++i){\n\t\tprefix[i + 1] = prefix[i] + a[i];\n\t}\n\tint res = INT_MIN; // Początkowo ustawiamy sumę na najmniejszą możliwą\n\tint minPrefix = 0;\n\tfor(int j = 0; j &lt; a.size(); j++){\n\t\tres = max(res, a[j] - minPrefix);\n\t\tminPrefix = min(minPrefix, a[j]);\n\t}\n\treturn res;\n}\n\nNajlepsza metoda\nZauważmy, że nigdy nie opłaca nam się zacząć podtablicy od fragmentu z sumą ujemną.\nJeżeli napotkamy taki fragment, to lepiej od nowa zacząć liczyć tablicę, ponieważ zero jest większe niż jakakolwiek liczba ujemna (przeważnie).\nKorzystając z tej zasady możemy znaleźć bardzo prostą metodę szukania takiej tablicy. Idziemy przez tablicę licząc teraźniejszą sumę i jeżeli jest mniejsza od 0, to ją ustawiamy na 0. W międzyczasie aktualizujemy największą sumę jaką spotkaliśmy.\nDlaczego to działa?\nSzukamy najlepszego „początku” dla każdego końca. Dla elementu na pozycji i, najlepszym początkiem jest albo on sam (jeśli to, co było wcześniej, dawało sumę ujemną), albo dołączenie do poprzedniej najlepszej grupy (jeśli ta była dodatnia).\nZłożoność czasowa: O(n)\nZłożoność pamięciowa: O(1)\nKod\nint maxSubArray(vector&lt;int&gt;&amp; nums) {\n\tint total = 0;\n\tint res = nums[0];\n\tfor(int i = 0; i &lt; nums.size(); i++){\n\t\ttotal += nums[i];\n\t\tres = max(res, total);\n\t\t\n\t\ttotal = max(total, 0); //Jeżeli suma jest ujemna, to ją pomijamy\n\t}\n\treturn res;\n}",
 		"tags": [ "note"]
