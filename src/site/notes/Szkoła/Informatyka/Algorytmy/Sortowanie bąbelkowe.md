@@ -21,7 +21,7 @@ Idziemy przez tablicę i jeżeli 2 kolejne elementy są w złej kolejności to j
 **Pamięciowa**: O(1)
 
 # Kiedy użyć
-Prawie nigdy, to jest mało efektywny algorytm sortowania. Najczęściej używamy funkcji `sort()`. Jeżeli już musimy sami coś zaimplementować, to lepiej zrobić [[Merge Sort\|Merge Sort]].
+Prawie nigdy, to jest mało efektywny algorytm sortowania. Najczęściej używamy funkcji `sort()`. Jeżeli już musimy sami coś zaimplementować, to lepiej zrobić [[Merge sort\|Merge Sort]].
 
 # Kod
 ```cpp

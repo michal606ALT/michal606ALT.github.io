@@ -9,4 +9,4 @@ To jest przyszła strona główna.
  - [ ] Sortowanie bąbelkowe
  - [ ] Sortowanie przez wstawianie
  - [ ] Merge Sort
- - [ ] 
+ - [ ] DFS

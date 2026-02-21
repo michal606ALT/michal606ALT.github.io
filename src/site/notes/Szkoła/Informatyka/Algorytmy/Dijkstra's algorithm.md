@@ -6,6 +6,16 @@
 # Cel
 Znaleźć najkrótszą drogę od źródła do każdego z wierzchołków na [[Graf\|grafie]].
 
+# Idea
+Jest to [[Algorytm zachłanny\|Algorytm zachłanny]], na każdym kroku wybiera najbliższy dostępny punkt, mając nadzieję że doprowadzi go to do pola najkrótszą trasą.
+
+Potrzebujemy do niego jakiejś formy zapisu [[Graf\|grafu]]. Najczęściej będzie to lista sąsiedztwa, która dla każdego wierzchołka zapisuje listę wszystkich, z którymi ma krawędź.
+
+# Użycie [[Heap\|kolejki priorytetowej]]
+Kolejka priorytetowa zawsze wybiera węzeł o najmniejszym dystansie, co pozwala skupić się na najkrótszych trasach i pominąć te mniej efektywne. Wybierając w pierwszej kolejności punkt z minimalną odległością, algorytm zyskuje pewność, że optymalna droga do jego sąsiadów została już ustalona. Dzięki temu, jeśli dany węzeł trafi do kolejki ponownie, nie musi być już przetwarzany – jego najkrótsza możliwa ścieżka jest już znana.
+
+Jeżeli z kolejki wyciągniemy wierzchołek, który już sprawdziliśmy, to możemy go pominąć.
+
 # Plan działania
 1. Tworzymy tablicę $dystans$ i ustawiamy wartość wszystkich elementów na $\infty$. Źródło powinno mieć wartość 0.
 2. Tworzymy [[Heap\|kolejkę priorytetową]] i na początku wrzucamy do niej parę $(\text{0; źródło})$ kolejką będzie przetrzymywała pary $(dystans, wierzchołek)$.
@@ -71,7 +81,7 @@ int main() {
     int nodes = 5;
     vector<vector<Edge>> graph(nodes);
 
-    // Przykładowy graf
+    // Przykładowy graf 
     graph[0].push_back({1, 4});
     graph[0].push_back({2, 1});
     graph[2].push_back({1, 2});

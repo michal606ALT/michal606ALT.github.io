@@ -3,25 +3,49 @@
 ---
 
 
-# Cel
-Mamy pomnożyć przez siebie 2 liczby, jednak są one za duże na liczbowe typy danych.
+## Cel
 
-# Omówienie
-Wczytamy te liczby początkowo [[String\|jako tekst]], a potem zamienimy na [[Tablica\|tablice]] cyfr. Przy okazji musimy obsłużyć możliwy minus.
+Standardowe typy danych (jak `int` czy `long long`) mają swoje limity pamięciowe. Gdy musimy pomnożyć przez siebie liczby mające setki lub tysiące cyfr, musimy zrezygnować z gotowych rozwiązań i zaimplementować własną logikę mnożenia, opartą na metodzie, którą znamy ze szkoły – **mnożeniu pisemnym**.
 
-Tablice powinny być odwrócone (ostatnia cyfra powinna być na początku).
+## Omówienie algorytmu
 
-Dalej stworzymy tablicę wynikową o rozmiarze $a.size() + b.size() - 1$.
+### 1. Przygotowanie danych
 
-Za pomocą 2 pętli zagnieżdżonych przechodzimy przez każdą parę cyfr $(a[i], b[j])$.
+Liczby wczytujemy jako **ciągi znaków (String)**, co pozwala na ich dowolną długość. Następnie konwertujemy je na **tablice liczb**, przechowujące poszczególne cyfry.
 
-Pierwsza pętla powinna przechodzić przez cyfry $a$, a druga przez cyfry $b$. 
+- **Obsługa znaku:** Należy sprawdzić, czy liczby są ujemne. Wynik będzie ujemny tylko wtedy, gdy dokładnie jedna z liczb posiada minus. 
+- **Odwrócenie kolejności:** Tablice cyfr warto odwrócić tak, aby cyfra jedności znalazła się pod indeksem `0`. To znacznie ułatwia zarządzanie indeksami podczas mnożenia i przenoszenia nadwyżek.
 
-Teraz zapiszemy w tablicy wynikowej iloczyn tych dwóch cyfr, zwiększając wartość na pozycji $i + j$.
-$$c[i + j] = a[i] + b[I]$$
+### 2. Tablica wynikowa
 
-Przechodzimy przez tablicę wynikową i jeżeli wartość jest większa niż 10, to przepisujemy "nadwyżkę" do kolejnego pola (możliwe jest że nam zabraknie pól, trzeba wtedy dodać nowy element na koniec tablicy).
+Rozmiar tablicy wynikowej $c$ powinien wynosić maksymalnie $a.size() + b.size()$.
 
-Jeżeli wcześniej wyszło nam, że wynik będzie ujemny, to wypisujemy '-'. 
+> _Uwaga: Suma liczby cyfr dwóch mnożonych liczb określa maksymalną długość wyniku._
 
-Idziemy od końca tablicy wynikowej, musimy pominąć wszystkie zera na początku liczby (np. 005 nie jest prawidłowym wynikiem).
+### 3. Logika mnożenia (Splot)
+
+W przeciwieństwie do zwykłego mnożenia pisemnego, gdzie mnożymy liczbę a przez każdą cyfrę b, tu będziemy mnożyć każdą cyfrę a przez każdą cyfrę b.
+
+Zamiast przejmować się skomplikowanymi przeniesieniami, pozwolimy zapisać dowolną liczbę na miejscu cyfry. W [[#4. Normalizacja wyniku (Obsługa przeniesień)]] się zajmiemy tego konsekwencjami.
+
+Używając dwóch zagnieżdżonych pętli, mnożymy każdą cyfrę pierwszej liczby przez każdą cyfrę drugiej. Wynik mnożenia pary cyfr na pozycjach $i$ oraz $j$ dodajemy do tablicy wynikowej pod indeksem $i + j$.
+
+
+Zależność tę opisuje wzór:
+
+$$c[i + j] += a[i] \cdot b[j]$$
+
+### 4. Normalizacja wyniku (Obsługa przeniesień)
+
+Po zakończeniu mnożenia wszystkich par, w polach tablicy $c$ mogą znajdować się liczby znacznie większe niż 10. Musimy "uporządkować" tablicę, idąc od początku:
+
+- Wartość pod danym indeksem zostaje zastąpiona przez resztę z dzielenia przez 10.
+- Nadwyżka (część całkowita z dzielenia) przechodzi do kolejnego pola.
+
+### 5. Formatowanie wyjścia
+
+Zanim wyświetlimy wynik, musimy wykonać dwa kroki:
+
+1. **Usunięcie zer wiodących:** Podczas mnożenia (np. $0 \cdot 0$) na końcu tablicy wynikowej mogą pojawić się niepotrzebne zera (np. otrzymamy `500` zamiast `5`). Należy je pominąć, aż trafimy na pierwszą cyfrę znaczącą.
+2. **Znak:** Jeśli z analizy na początku wynika, że liczba jest ujemna (a wynik nie jest zerem), wypisujemy znak `-`.
+3. **Kolejność:** Ponieważ operowaliśmy na odwróconych tablicach, wynik wypisujemy od końca.
