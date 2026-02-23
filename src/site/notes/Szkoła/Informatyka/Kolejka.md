@@ -8,7 +8,7 @@ Kolejka (ang. _queue_) to liniowa struktura danych działająca według zasady *
 
 ## Idea działania
 
-Działanie kolejki można porównać do ogonika w sklepie – osoba, która przyszła jako pierwsza, jest obsługiwana jako pierwsza, a nowe osoby dołączają zawsze na samym końcu. Operacje odbywają się na dwóch różnych końcach: dodajemy z tyłu (ang. _back_), a usuwamy z przodu (ang. _front_).
+Działanie kolejki można porównać do kolejki w sklepie – osoba, która przyszła jako pierwsza, jest obsługiwana jako pierwsza, a nowe osoby dołączają zawsze na samym końcu. Operacje odbywają się na dwóch różnych końcach: dodajemy z tyłu (ang. _back_), a usuwamy z przodu (ang. _front_).
 
 Podstawowe operacje:
 

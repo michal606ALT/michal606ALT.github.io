@@ -14,8 +14,12 @@
 > - [[Szkoła/Informatyka/Tablica\|Tablica]]
 > -  [[Szkoła/Informatyka/Techniki/Rekurencja\|Rekurencja]]
 
+>[!check] Nowe
+> - [[Szkoła/Informatyka/Kolejka priorytetowa\|Kolejka priorytetowa]]
 ## O stronie
 To strona poświęcona skupianiu notatek i zadań z informatyki i algorytmiki. Zdarza się, że artykuły wybiegają poza materiał przerabiany na lekcjach.
+
+Strona nadal jest w wersji BETA
 
 
 >[!warning] Przyszłe Artykuły
