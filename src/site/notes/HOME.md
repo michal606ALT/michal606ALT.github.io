@@ -2,7 +2,7 @@
 {"dg-publish":true,"permalink":"/home/","tags":["gardenEntry"]}
 ---
 
-
+# ALGOHUB HOME
 
 >[!tip] Najlepsze artykuły
 > - [[Szkoła/Informatyka/Algorytmy/KMP\|KMP]]
@@ -11,8 +11,8 @@
 >
 
 > [!todo] Warto zacząć od
-> [[Szkoła/Informatyka/Tablica\|Tablica]]
-> [[Szkoła/Informatyka/Techniki/Rekurencja\|Rekurencja]]
+> - [[Szkoła/Informatyka/Tablica\|Tablica]]
+> -  [[Szkoła/Informatyka/Techniki/Rekurencja\|Rekurencja]]
 
 ## O stronie
 To strona poświęcona skupianiu notatek i zadań z informatyki i algorytmiki. Zdarza się, że artykuły wybiegają poza materiał przerabiany na lekcjach.
