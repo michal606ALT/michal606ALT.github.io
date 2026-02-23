@@ -4,7 +4,7 @@
 
 
 # Cel
-Posortować [[Tablica\|tablicę]].
+Posortować [[Szkoła/Informatyka/Tablica\|tablicę]].
 
 # Idea działania
 Idziemy przez tablicę i jeżeli 2 kolejne elementy są w złej kolejności to je **zamieniamy ze sobą**. Przesuwamy iterator o 1 i sprawdzamy ponownie. Po 1 przejściu mamy gwarancje, że największy (lub najmniejszy element, zależy jak sortujemy) jest na końcu tablicy. Możemy iść od początku od nowa i powtarzać aż nie posortujemy całej tablicy.

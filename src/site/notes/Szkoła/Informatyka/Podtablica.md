@@ -2,7 +2,7 @@
 {"dg-publish":true,"permalink":"/szkola/informatyka/podtablica/"}
 ---
 
-To ciągły fragment [[Tablica\|tablicy]]. Inaczej to ujmując, podtablica to [[Tablica\|Tablica]] w tablicy. Może obejmować całą oryginalną tablicę.
+To ciągły fragment [[Szkoła/Informatyka/Tablica\|tablicy]]. Inaczej to ujmując, podtablica to [[Szkoła/Informatyka/Tablica\|Tablica]] w tablicy. Może obejmować całą oryginalną tablicę.
 
 # Ilość
 Jeżeli mamy tablicę rozmiaru $N$, to mamy:
